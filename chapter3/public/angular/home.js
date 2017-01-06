@@ -1,8 +1,9 @@
 /**
  * Created by Administrator on 2017/1/5.
  */
-angular.module('myApp', [])
+var app = angular.module('myApp', [])
     .controller('homeCtrl',function ($scope,$http) {
+        $scope.aaa = 111;
         /*提交方法*/
         $scope.submit = function () {
             var user = $scope.user;
@@ -10,7 +11,24 @@ angular.module('myApp', [])
             $http({
                 method:'POST',
                 url:'/submitForm',
-                params:user
+                // params:user
+                data:user
+            })
+        };
+
+        /*请求方法*/
+        $scope.getData = function () {
+            $http({
+                method:'GET',
+                url:'/getSomeData'
+            }).success(function (res) {
+                console.log(res);
             })
         }
     });
+
+app.config(['$interpolateProvider', function($interpolateProvider) {
+    $interpolateProvider.startSymbol('{$');
+    $interpolateProvider.endSymbol('$}');
+}]);
+

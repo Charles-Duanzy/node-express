@@ -1,6 +1,8 @@
 <script src="angular/home.js"></script>
 <div class="container" ng-controller="homeCtrl">
     <h1>Welcome to the Home Page</h1>
+    {$aaa$}
+    <button class="btn btn-default btn-block" ng-click="getData()" style="margin-bottom: 10px;">请求方法测试</button>
 
     <form name="testForm" class="form-horizontal">
         <div class="form-group">
@@ -8,7 +10,9 @@
                 email:
             </label>
             <div class="col-xs-4">
-                <input class="form-control" type="text" ng-model="user.email">
+                <input class="form-control" type="text" ng-model="user.email" name="email" required
+                       ng-pattern="/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/">
+                <span class="error" style="color: red" ng-if="testForm.email.$error.pattern">请填写正确的邮箱地址</span>
             </div>
 
         </div>
@@ -17,11 +21,12 @@
                 password:
             </label>
             <div class="col-xs-4">
-                <input class="form-control" type="text" ng-model="user.password">
+                <input class="form-control" type="password" ng-model="user.password" ng-minlength="6" name="psw" required>
+                <span class="error" style="color: red" ng-if="testForm.psw.$error.minlength">必须大于6位</span>
             </div>
         </div>
         <div class="col-xs-5 text-center">
-            <button class="btn btn-primary" ng-click="submit()">提交</button>
+            <button type="submit" class="btn btn-primary" ng-click="submit()" ng-disabled="testForm.$invalid">提交</button>
         </div>
 
 
