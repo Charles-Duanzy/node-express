@@ -18,16 +18,16 @@ app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname + '/public'));
 app.use(express.static(__dirname + '/lib'));
 // parse application/x-www-form-urlencoded
-app.use(bodyParser.urlencoded({extended: false}))
+app.use(bodyParser.urlencoded({extended: false}));
 
 // parse application/json
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
 /*主页*/
 app.get('/', function (req, res) {
     res.cookie('user', 'ceshi');
     var obj = {
-        message: 'welcome'
+        message: 'welcome my home page'
     };
     res.render('home', {information: obj});
 
